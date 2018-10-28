@@ -17,6 +17,7 @@ type API struct {
 var startTime = time.Now()
 var IDs []int
 var db = TrackDB{}
+var ticker Ticker
 
 
 func main() {

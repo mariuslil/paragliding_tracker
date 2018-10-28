@@ -5,6 +5,7 @@ import (
 	"github.com/marni/goigc"
 	"net/http"
 	"strings"
+	"time"
 )
 
 
@@ -39,8 +40,14 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 			t.Track_length = track.Points[0].Distance(track.Points[len(track.Points)-1])
 			t.Track_src_url = url["url"]
 
+			var tick = time.Now()
+			latestTrack(tick)
+
 
 			id := db.Add(t)
+			if len(IDs) == 0{
+				ticker.T_start = tick
+			}
 			IDs = append(IDs, id)
 			json.NewEncoder(w).Encode(id)
 			http.Error(w, http.StatusText(http.StatusOK), http.StatusOK)

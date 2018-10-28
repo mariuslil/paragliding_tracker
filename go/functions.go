@@ -74,6 +74,10 @@ func replyField (w *http.ResponseWriter, db *TrackDB, id string, field string){
 	}
 }
 
+func latestTrack (latest time.Time) {
+	ticker.T_latest = latest
+}
+
 func replyLatest(){
 
 }
