@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/marni/goigc"
 	"net/http"
 	"strings"
@@ -86,18 +87,18 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 
 				if url[4] == "latest" {
 
-					replyLatest()
+					replyLatest(&w)
 					http.Error(w, http.StatusText(http.StatusOK), http.StatusOK)
 					return
 
 				} else if url[4] != "" {
 
-					replyTime()
+					replyTime(&w, url[4])
 					http.Error(w, http.StatusText(http.StatusOK), http.StatusOK)
 					return
 				}
 
-				replyTicker()
+				replyTicker(&w)
 				http.Error(w, http.StatusText(http.StatusOK), http.StatusOK)
 				return
 
@@ -120,7 +121,7 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 	case "DELETE":
 		w.Header().Set("Content-Type", "application/json")
 		url := strings.Split(r.URL.Path, "/")
-
+		
 		if url[3] == "webhook" && url[4] == "new_track" && len(url) == 5 {
 
 
@@ -138,5 +139,23 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func adminHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/plain")
+	switch r.Method {
+	case "GET":
+		if len(db.tracks) == 0 {
+			http.Error(w, "No tracks in DB", http.StatusBadRequest)
+		} else {
+			fmt.Fprint(w, len(db.tracks))
+		}
 
+	case "DELETE":
+		for k := range db.tracks {
+			delete(db.tracks, k)
+		}
+
+	default:
+		http.Error(w, "Not yet implemented", http.StatusNotImplemented)
+		return
+
+	}
 }

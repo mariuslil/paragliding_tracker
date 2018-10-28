@@ -70,7 +70,7 @@ func replyField (w *http.ResponseWriter, db *TrackDB, id string, field string){
 	} else if field == "H_date" {
 		fieldValue := db.fieldExist(intID, field)
 		fmt.Fprint(*w, fieldValue)
-		fmt.Println(*w,)
+		fmt.Fprintln(*w,)
 	}
 }
 
@@ -78,16 +78,19 @@ func latestTrack (latest time.Time) {
 	ticker.T_latest = latest
 }
 
-func replyLatest(){
+func replyLatest(w *http.ResponseWriter){
+	fmt.Fprint(*w, ticker.T_latest)
+	fmt.Fprintln(*w,)
+}
+
+func replyTime(w *http.ResponseWriter, time string){
+	json.NewEncoder(*w).Encode(ticker)
 
 }
 
-func replyTime(){
+func replyTicker(w *http.ResponseWriter){
 
-}
-
-func replyTicker(){
-
+	json.NewEncoder(*w).Encode(ticker)
 }
 
 func getPort() string {
@@ -97,14 +100,6 @@ func getPort() string {
 		port = "8080"
 	}
 	return ":" + port
-}
-
-func handleAPI(w http.ResponseWriter){
-
-}
-
-func handleWeb(w http.ResponseWriter){
-
 }
 
 
