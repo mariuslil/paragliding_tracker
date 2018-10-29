@@ -83,7 +83,8 @@ func replyLatest(w *http.ResponseWriter){
 	fmt.Fprintln(*w,)
 }
 
-func replyTime(w *http.ResponseWriter, time string){
+func replyTime(w *http.ResponseWriter, time string) {
+
 	json.NewEncoder(*w).Encode(ticker)
 
 }

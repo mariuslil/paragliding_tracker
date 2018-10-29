@@ -3,29 +3,19 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:25bba603295f978d1b26aac497b96443dc6a7a32c46e9035888c2e2eb179985d"
   name = "github.com/golang/geo"
-  packages = [
-    "r1",
-    "r2",
-    "r3",
-    "s1",
-    "s2",
-  ]
-  pruneopts = ""
+  packages = ["r1","r2","r3","s1","s2"]
   revision = "476085157cff9aaeef4d4f124649436542d4114a"
 
 [[projects]]
-  digest = "1:93756a2d0dda00e2eb2837acbd27248a07cc8e03dd2112a480f2b4684138d6b7"
   name = "github.com/marni/goigc"
   packages = ["."]
-  pruneopts = ""
   revision = "35300268c031cea36d638a6793146fccd1cbcdd1"
   version = "v0.1.0"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/marni/goigc"]
+  inputs-digest = "97f9aa6ae5b010ad5c2d67479369efbdc4dbf7d54c2b26d384ff68dadd7d7f55"
   solver-name = "gps-cdcl"
   solver-version = 1
